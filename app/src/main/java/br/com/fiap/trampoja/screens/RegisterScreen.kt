@@ -4,7 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.material3.HorizontalDivider
@@ -26,7 +25,7 @@ import br.com.fiap.trampoja.ui.theme.TrampojaTheme
 import br.com.fiap.trampoja.components.TrampojaTextField
 
 @Composable
-fun LoginScreen() {
+fun RegisterScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -47,17 +46,26 @@ fun LoginScreen() {
                     .padding(bottom = 32.dp)
             )
             Text(
-                text = "Entrar",
+                text = "Crie sua conta",
                 fontSize = 20.sp,
                 modifier = Modifier
                     .align(Alignment.Start)
                     .padding(bottom = 4.dp)
             )
 
+            var name by remember { mutableStateOf("") }
             var email by remember { mutableStateOf("") }
             var senha by remember { mutableStateOf("") }
-            var lembrarSenha by remember { mutableStateOf(false) }
+            var confirmSenha by remember { mutableStateOf("") }
+            var senhaError by remember { mutableStateOf(false) }
+            var termos by remember { mutableStateOf(false) }
 
+            TrampojaTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = "Nome completo",
+                keyboardType = KeyboardType.Text
+            )
             TrampojaTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -70,6 +78,25 @@ fun LoginScreen() {
                 label = "Senha",
                 isPassword = true
             )
+            TrampojaTextField(
+                value = confirmSenha,
+                onValueChange = {
+                    confirmSenha = it
+                    senhaError = confirmSenha != senha
+                },
+                label = "Confirme sua senha",
+                isPassword = true
+            )
+            if (senhaError) {
+                Text(
+                    text = "As senhas não coincidem",
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(start = 8.dp, bottom = 8.dp)
+                )
+            }
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -78,21 +105,27 @@ fun LoginScreen() {
                     .padding(bottom = 8.dp)
             ) {
                 Checkbox(
-                    checked = lembrarSenha,
-                    onCheckedChange = { lembrarSenha = it },
+                    checked = termos,
+                    onCheckedChange = { termos = it },
                     colors = CheckboxDefaults.colors(
                         checkedColor = MaterialTheme.colorScheme.primary,
                         uncheckedColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
                 )
                 Text(
-                    text = "Lembrar senha",
+                    text = "Eu concordo com os termos",
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
             Button(
-                onClick = { },
+                onClick = {
+                    if (senha == confirmSenha && senha.isNotBlank()) {
+                        // continua para prox. page
+                    } else {
+                        senhaError = true
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -104,6 +137,7 @@ fun LoginScreen() {
             ) {
                 Text("Continuar", color = MaterialTheme.colorScheme.onPrimary)
             }
+
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -136,19 +170,14 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(32.dp))
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "Esqueceu sua senha?",
-                    color = MaterialTheme.colorScheme.onSurface,
-                    textAlign = TextAlign.Center
-                )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = buildAnnotatedString {
                         withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onSurface)) {
-                            append("Não tem conta? ")
+                            append("Já tem conta? ")
                         }
                         withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                            append("Cadastre-se")
+                            append("Entrar")
                         }
                     },
                     textAlign = TextAlign.Center,
@@ -161,8 +190,8 @@ fun LoginScreen() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun LoginPreview() {
+private fun RegisterPreview() {
     TrampojaTheme {
-        LoginScreen()
+        RegisterScreen()
     }
 }
