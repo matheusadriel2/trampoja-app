@@ -46,8 +46,8 @@ fun JobDetailDialog(
         Card(
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .fillMaxWidth(0.90f)   // ocupa quase toda largura
-                .fillMaxHeight(0.90f), // ocupa quase toda altura
+                .fillMaxWidth(0.90f)
+                .fillMaxHeight(0.90f),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
@@ -55,7 +55,7 @@ fun JobDetailDialog(
                 modifier = Modifier
                     .background(Color.White)
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState()) // 🔹 tudo dentro do scroll
+                    .verticalScroll(rememberScrollState())
             ) {
                 Text(
                     text = job.title,

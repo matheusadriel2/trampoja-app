@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.fiap.trampoja.R
 import br.com.fiap.trampoja.components.JobCard
@@ -162,4 +163,10 @@ fun HomeScreen() {
             )
         }
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun Preview() {
+    HomeScreen()
 }
