@@ -1,15 +1,62 @@
+# =========================
+# Android / Gradle
+# =========================
 *.iml
-.gradle
-/local.properties
+.gradle/
+local.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/androidTestResultsUserPreferences.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/misc.xml
+/.idea/deviceManager.xml
+
+# Build
+/build/
+/captures/
+/outputs/
+/intermediates/
+/generated/
+
+# NDK / CMake
+.externalNativeBuild/
+.cxx/
+
+# Log / temp
+*.log
+*.temp
+*.tmp
+
+# OS files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+Thumbs.db
+
+# Android Studio
+.idea/
+*.ipr
+*.iws
+
+# Keystore files
+*.jks
+*.keystore
+
+# =========================
+# Kotlin / Compose
+# =========================
+# Kotlin build folders
+.kotlinc/
+
+# Compose compiler caches
+compose-metrics/
+compose-reports/
+
+# =========================
+# Gradle wrapper
+# =========================
+/.gradle/
+/gradlew
+/gradlew.bat
