@@ -1,6 +1,7 @@
 package br.com.fiap.trampoja.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -16,10 +17,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.fiap.trampoja.components.utils.getLocationEmoji
-import br.com.fiap.trampoja.ui.theme.TrampojaTheme
 import br.com.fiap.trampoja.components.utils.getTagEmoji
 
 @Composable
@@ -31,12 +30,14 @@ fun JobCard(
     tag: String,
     tagColor: Color,
     onSaveClick: () -> Unit = {},
-    onIgnoreClick: () -> Unit = {}
+    onIgnoreClick: () -> Unit = {},
+    onClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp)
+            .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -54,7 +55,7 @@ fun JobCard(
                     Text(
                         text = buildAnnotatedString {
                             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Empresa: ") }
-                            withStyle(SpanStyle(fontWeight = FontWeight.Normal)) { append(company) }
+                            append(company)
                         },
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(bottom = 4.dp)
@@ -68,7 +69,7 @@ fun JobCard(
                         Text(
                             text = buildAnnotatedString {
                                 withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Avaliação: ") }
-                                withStyle(SpanStyle(fontWeight = FontWeight.Normal)) { append(rating.toString()) }
+                                append(rating.toString())
                             },
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -87,13 +88,10 @@ fun JobCard(
                         Text(
                             text = buildAnnotatedString {
                                 withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Localização: ") }
-                                withStyle(SpanStyle(fontWeight = FontWeight.Normal)) {
-                                    append("$location ${getLocationEmoji(location)}")
-                                }
+                                append("$location ${getLocationEmoji(location)}")
                             },
                             style = MaterialTheme.typography.titleMedium
                         )
-
                     }
                 }
 
@@ -132,31 +130,6 @@ fun JobCard(
                     )
                 }
             }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun JobCardListPreview() {
-    TrampojaTheme {
-        Column(modifier = Modifier.padding(16.dp)) {
-            JobCard(
-                title = "Gerente Administrativo",
-                company = "Kofin",
-                rating = 4.9,
-                location = "São Paulo/SP",
-                tag = "Afirmativa para pessoas com deficiência",
-                tagColor = Color(0xFF1565C0)
-            )
-            JobCard(
-                title = "Designer Gráfico",
-                company = "Kofin",
-                rating = 4.7,
-                location = "Remoto",
-                tag = "Afirmativa para pessoas negras",
-                tagColor = Color.Black
-            )
         }
     }
 }
