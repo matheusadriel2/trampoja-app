@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 
 val BlueLight = Color(0xFFB8E6FE)
 val Blue = Color(0xFF00A6F4)
-val BlueNavy = Color(0xFF45556C)
+val BlueNavy = Color(0xFF0069A8)
 
 private val DarkColorScheme = darkColorScheme(
     primary = BlueNavy,
