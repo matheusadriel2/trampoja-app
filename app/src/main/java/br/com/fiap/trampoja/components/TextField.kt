@@ -1,8 +1,6 @@
 package br.com.fiap.trampoja.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -24,7 +22,8 @@ fun TrampojaTextField(
     label: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    leadingIcon: (@Composable (() -> Unit))? = null,
 ) {
     OutlinedTextField(
         value = value,
@@ -38,6 +37,7 @@ fun TrampojaTextField(
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         shape = RoundedCornerShape(18),
+        leadingIcon = leadingIcon,
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color(0xFFE0E3E1),
             unfocusedIndicatorColor = Color(0xFFE0E3E1),
