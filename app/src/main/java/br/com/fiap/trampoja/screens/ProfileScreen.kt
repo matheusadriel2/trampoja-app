@@ -16,6 +16,7 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.trampoja.R
+import br.com.fiap.trampoja.components.Navbar
 
 @Composable
 fun ProfileScreen() {
@@ -39,12 +41,14 @@ fun ProfileScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .statusBarsPadding()
-            .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
+                .statusBarsPadding()
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+                .padding(bottom = 80.dp)
         ) {
             Row(
                 modifier = Modifier
@@ -249,6 +253,11 @@ fun ProfileScreen() {
                 Spacer(modifier = Modifier.height(32.dp))
             }
         }
+        Navbar(
+            selected = "profile",
+            onItemSelected = { /* ... */ },
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 

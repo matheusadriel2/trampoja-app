@@ -23,7 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.fiap.trampoja.R
 import br.com.fiap.trampoja.components.JobCard
+import br.com.fiap.trampoja.components.Navbar
 import br.com.fiap.trampoja.components.TrampojaTextField
+import br.com.fiap.trampoja.ui.theme.TrampojaTheme
 
 @Composable
 fun HomeScreen() {
@@ -35,10 +37,13 @@ fun HomeScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .statusBarsPadding()
-            .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .statusBarsPadding()
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+                .padding(bottom = 80.dp)
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -162,11 +167,18 @@ fun HomeScreen() {
                 onDismiss = { selectedJob = null }
             )
         }
+        Navbar(
+            selected = "profile",
+            onItemSelected = { /* ... */ },
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun Preview() {
-    HomeScreen()
+    TrampojaTheme {
+        HomeScreen()
+    }
 }
