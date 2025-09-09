@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TrampojaTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier,
     leadingIcon: (@Composable (() -> Unit))? = null,
 ) {
     OutlinedTextField(

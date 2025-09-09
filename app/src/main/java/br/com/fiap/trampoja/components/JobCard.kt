@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Block
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
@@ -31,7 +32,8 @@ fun JobCard(
     tagColor: Color,
     onSaveClick: () -> Unit = {},
     onIgnoreClick: () -> Unit = {},
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    isSaved: Boolean = false
 ) {
     Card(
         modifier = Modifier
@@ -51,7 +53,6 @@ fun JobCard(
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
-
                     Text(
                         text = buildAnnotatedString {
                             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Empresa: ") }
@@ -60,7 +61,6 @@ fun JobCard(
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -74,13 +74,12 @@ fun JobCard(
                             style = MaterialTheme.typography.titleMedium
                         )
                         Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = "Avaliação",
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = null,
                             tint = Color(0xFFFFC107),
                             modifier = Modifier.size(20.dp)
                         )
                     }
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
@@ -94,7 +93,6 @@ fun JobCard(
                         )
                     }
                 }
-
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -108,7 +106,6 @@ fun JobCard(
                     )
                 }
             }
-
             Column(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -117,15 +114,15 @@ fun JobCard(
             ) {
                 IconButton(onClick = onSaveClick) {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "Salvar vaga",
+                        imageVector = if (isSaved) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                        contentDescription = if (isSaved) "Remover dos favoritos" else "Adicionar aos favoritos",
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
                 IconButton(onClick = onIgnoreClick) {
                     Icon(
-                        imageVector = Icons.Default.Block,
-                        contentDescription = "Ignorar vaga",
+                        imageVector = Icons.Filled.Block,
+                        contentDescription = null,
                         tint = Color.Red
                     )
                 }
